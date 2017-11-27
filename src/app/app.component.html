@@ -1,20 +1,111 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div class="container-fluid">
+  <div style="margin-bottom: 10px;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Book Store</a>
+    </nav>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div style="margin-bottom: 10px;">
+        <button class="btn btn-outline-primary" (click)="open(content)">Create New</button>
+      </div>
+      <table class="table striped">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>ISBN</th>
+            <th>Publication Date</th>
+            <th>Publisher</th>
+            <th>Price</th>
+            <th>Genre</th>
+            <th>Format</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let book of books">
+            <td style="max-width:200px">{{book.title}}</td>
+            <td>{{book.author}}</td>
+            <td>{{book.isbn}}</td>
+            <td>{{renderDate(book)}}</td>
+            <td style="max-width:200px">{{book.publisher}}</td>
+            <td>{{book.price}}</td>
+            <td>{{book.genre}}</td>
+            <td>{{book.format}}</td>
+            <td>
+              <button class="btn btn-primary" (click)="editItem(content, book)"><i class="fa fa-edit"></i></button>
+              <button class="btn btn-danger" (click)="removeItem(book)"><i class="fa fa-trash"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
 
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Add New</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="newBookForm" #form="ngForm" (ngSubmit)="createNewBook(newBookForm.value)">
+      <div class="form-group">
+        <input type="text" placeholder="Title" formControlName="title" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <input type="text" placeholder="ISBN" formControlName="isbn" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <input type="text" placeholder="Author" formControlName="author" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <input type="date" placeholder="Publication Date" formControlName="publication_date" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <input type="text" placeholder="Publisher" formControlName="publisher" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <input type="number" placeholder="Price" formControlName="price" class="form-control" />
+      </div>
+
+      <div class="form-group">
+        <select formControlName="genre" class="form-control">
+            <option value>Select Genre</option>
+            <option>Science Fiction</option>
+            <option>Satire</option>
+            <option>Drama</option>
+            <option>Action &amp; Adventure</option>
+            <option>Romance</option>
+            <option>Mystery</option>
+            <option>Horror</option>
+            <option>Self Help</option>
+            <option>Children's &amp; Young Adults</option>
+            <option>Business &amp; Economics</option>
+          </select>
+      </div>
+
+      <div class="form-group">
+        <select formControlName="format" class="form-control">
+            <option value>Select Format</option>
+            <option>Paperback</option>
+            <option>Digital</option>
+          </select>
+      </div>
+
+      <div *ngIf="error">{{error}}</div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+    <button type="button" [disabled]="!newBookForm.valid" class="btn btn-default" (click)="createNewBook(newBookForm.value)">Create</button>
+  </div>
+</ng-template>

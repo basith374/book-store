@@ -1,0 +1,46 @@
+[
+    {
+        "id": "1",
+        "title": "Deep Work: Rules for Focused Success in a Distracted World",
+        "author": "Cal Newport",
+        "publication_date": "12/02/2016",
+        "isbn": "0349413681",
+        "publisher": "Little, Brown Book Group",
+        "format": "Paperback",
+        "genre": "Children's & Young Adults",
+        "price": "276"
+    },
+    {
+        "id": 2,
+        "title": "The Power of Habit: Why We Do What We Do, and How to Change",
+        "author": "Charles Duhigg",
+        "publication_date": "07/02/2013",
+        "isbn": "1847946240",
+        "publisher": "RHUK",
+        "format": "Paperback",
+        "genre": "Children's & Young Adults",
+        "price": "269"
+    },
+    {
+        "id": 3,
+        "title": "Talking to Humans: Success starts with understanding your customers",
+        "author": "Giff Constable",
+        "publication_date": "N/A",
+        "isbn": "099080092X",
+        "publisher": "Amazon Asia-Pacific Holdings Private Limited",
+        "format": "Kindle Edition",
+        "genre": "Business & Economics",
+        "price": "89"
+    },
+    {
+        "id": 4,
+        "title": "So Good They Can't Ignore You",
+        "author": "Cal Newport",
+        "publication_date": "01/12/2016",
+        "isbn": "0349415862",
+        "publisher": "Piatkus",
+        "format": "Paperback",
+        "genre": "Business & Economics",
+        "price": "304"
+    }
+]
